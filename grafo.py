@@ -45,6 +45,30 @@ class Grafo:
         clima_indices = {"normal": 0, "lluvia": 1, "nieve": 2, "tormenta": 3}
         return self.matriz_tiempos[clima_indices[clima]]
     
+    def agregar_arco(self, ciudad1, ciudad2, tiempos):
+        for ciudad in [ciudad1, ciudad2]:
+            if ciudad not in self.ciudades:
+                self.ciudades.append(ciudad)
+        self.ciudades.sort()
+        self.indices = {ciudad: i for i, ciudad in enumerate(self.ciudades)}
+        n = len(self.ciudades)
+
+        while len(self.matriz_tiempos[0]) < n:
+            for clima in range(4):
+                for fila in self.matriz_tiempos[clima]:
+                    fila.append(math.inf)
+                self.matriz_tiempos[clima].append([math.inf] * n)
+
+        for clima in range(4):
+            for i in range(n):
+                self.matriz_tiempos[clima][i][i] = 0
+
+        i = self.indices[ciudad1]
+        j = self.indices[ciudad2]
+        for clima in range(4):
+            self.matriz_tiempos[clima][i][j] = tiempos[clima]
+
+    
     def eliminar_arco(self, ciudad1, ciudad2):
         if ciudad1 in self.indices and ciudad2 in self.indices:
             i = self.indices[ciudad1]
