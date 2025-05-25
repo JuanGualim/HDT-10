@@ -1,4 +1,3 @@
-# grafo.py
 import math
 
 class Grafo:
@@ -41,3 +40,14 @@ class Grafo:
             j = self.indices[c2]
             for clima in range(4):
                 self.matriz_tiempos[clima][i][j] = tiempos[clima]
+
+    def obtener_matriz(self, clima):
+        clima_indices = {"normal": 0, "lluvia": 1, "nieve": 2, "tormenta": 3}
+        return self.matriz_tiempos[clima_indices[clima]]
+    
+    def eliminar_arco(self, ciudad1, ciudad2):
+        if ciudad1 in self.indices and ciudad2 in self.indices:
+            i = self.indices[ciudad1]
+            j = self.indices[ciudad2]
+            for clima in range(4):
+                self.matriz_tiempos[clima][i][j] = math.inf
