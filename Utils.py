@@ -7,12 +7,12 @@ def mostrar_menu():
     print("4. Salir")
     return input("Seleccione una opción: ")
 
-def mostrar_ruta(origen, destino, distancias, rutas):
-    from_idx = rutas[0][0]
-    n = len(distancias)
-
-    ciudades = list(rutas[0][0] for i in range(n))  # reconvertir nombres si es necesario
+def mostrar_ruta(origen, destino, distancias, rutas, ciudades):
     indices = {nombre: i for i, nombre in enumerate(ciudades)}
+
+    if origen not in indices or destino not in indices:
+        print("Una o ambas ciudades no existen.")
+        return
 
     i = indices[origen]
     j = indices[destino]
