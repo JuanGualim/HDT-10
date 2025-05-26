@@ -12,8 +12,8 @@ clima_actual = "normal"
 
 # Ejecutar algoritmo de Floyd inicialmente
 distancias, rutas = floyd_warshall(grafo, clima_actual)
-
-while True:
+terminar = False
+while terminar == False:
     opcion = mostrar_menu()
 
     if opcion == "1":
@@ -42,7 +42,7 @@ while True:
         elif subop == "2":
             c1 = input("Ciudad origen: ")
             c2 = input("Ciudad destino: ")
-            tiempos = input("Ingrese los tiempos normal, lluvia, nieve, tormenta separados por espacio: ").split()
+            tiempos = input("Ingrese los tiempos para cada clima: normal, lluvia, nieve, tormenta. Separados por espacio: ").split()
             tiempos = list(map(float, tiempos))
             grafo.agregar_arco(c1, c2, tiempos)
 
@@ -58,7 +58,7 @@ while True:
 
     elif opcion == "4":
         print("Saliendo del programa...")
-        break
+        terminar = True
 
     else:
         print("Opción inválida")
