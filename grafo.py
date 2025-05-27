@@ -118,13 +118,3 @@ class Grafo:
                             linea = f"{self.ciudades[i]} {self.ciudades[j]} {' '.join(map(str, tiempos))}\n"
                             archivo.write(linea)
                             
-    def guardar_en_archivo(self, nombre_archivo):
-        with open(nombre_archivo, "w") as archivo:
-            n = len(self.ciudades)
-            for i in range(n):
-                for j in range(n):
-                    if i != j:
-                        tiempos = [self.matriz_tiempos[k][i][j] for k in range(4)]
-                        if all(t != float('inf') for t in tiempos):
-                            linea = f"{self.ciudades[i]} {self.ciudades[j]} {' '.join(map(str, tiempos))}\n"
-                            archivo.write(linea)
